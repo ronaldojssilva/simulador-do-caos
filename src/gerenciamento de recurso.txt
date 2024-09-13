@@ -9,3 +9,19 @@ docker container run -d -p 8080:3000 --cpu-period=100000 --cpu-quota=50000 --cpu
 --cpus = define quantas cpus utilizar
 docker container run -d -p 8080:3000 --cpus=1.5 --cpuset-cpus=0-1 ronaldojssilva/simulador-do-caos:v1
 docker container run -d -p 8080:3000 --cpus=2 --cpuset-cpus=0-1 ronaldojssilva/simulador-do-caos:v1
+
+
+memória
+docker container run -d -p 8080:3000 --cpus=2 --cpuset-cpus=0-1 ronaldojssilva/simulador-do-caos:v1
+
+se eu não definir a quantidade de swap ele vai colocar a mesma quantidad da RAM
+se eu colocar swap igual a RAM não utiliza a swap, orque na verdade swap a difereça entre o que esta definido em memory - memory-swap
+docker container run -d -p 8080:3000 --cpus=2 --cpuset-cpus=0-1 --memory=50m --memory-swap=50m ronaldojssilva/simulador-do-caos:v1
+
+como a aplicação consome em media 900mb vou deifinir em 2g para aguentar
+docker container run -d -p 8080:3000 --cpus=2 --cpuset-cpus=0-1 --memory=2G --memory-swap=2G ronaldojssilva/simulador-do-caos:v1
+
+lembrar que em clouds não tem swap geralmente
+
+procurar no google por
+codigo exit program 137
