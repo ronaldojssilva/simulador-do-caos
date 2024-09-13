@@ -7,7 +7,7 @@
 # # healthcheck
 # # docker container run -d -p 8080:3000 --health-cmd "curl -f http://localhost:3000/health" --health-timeout 5s --health-retries 3 --health-interval 10s --health-start-period 30s ronaldojssilva/simulador-do-caos:v1
 
-
+# # health check no compose
 services:
   simulador-do-caos:
     container_name: simulador-do-caos
@@ -19,10 +19,29 @@ services:
     ports:
       - 8080:3000
     restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 2
+      start_period: 30s
 
 
 
 
+
+
+# services:
+#   simulador-do-caos:
+#     container_name: simulador-do-caos
+#     # deixando o parametro da tag como opcional :-latest
+#     image: ronaldojssilva/simulador-do-caos:${SIMULADOR_DO_CAOS_TAG:-latest}
+#     build:
+#       context: ./src
+#       dockerfile: Dockerfile
+#     ports:
+#       - 8080:3000
+#     restart: always
 
 
 
