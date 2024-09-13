@@ -1,3 +1,7 @@
+# # entrar no wsl e observar
+# #  watch 'docker container ls -a'
+# #  htop
+
 # # docker compose build
 # # docker compose up -d --build
 # # docker container run -d -p 8080:3000 --restart=on-failure ronaldojssilva/simulador-do-caos:v1
@@ -26,6 +30,13 @@ services:
     #   retries: 2
     #   start_period: 30s
       disable: true
+    cpuset: "0"
+    memswap_limit: 512M
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
 
 
 
