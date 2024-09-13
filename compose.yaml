@@ -1,0 +1,74 @@
+# # docker compose build
+# # docker compose up -d --build
+# # docker container run -d -p 8080:3000 --restart=on-failure ronaldojssilva/simulador-do-caos:v1
+# # docker container run -d -p 8080:3000 --restart=on-failure:2 ronaldojssilva/simulador-do-caos:v1
+# # docker container run -d -p 8080:3000 --restart=unless-stopped ronaldojssilva/simulador-do-caos:v1
+# # docker container run -d -p 8080:3000 --restart=always ronaldojssilva/simulador-do-caos:v1
+# # healthcheck
+# # docker container run -d -p 8080:3000 --health-cmd "curl -f http://localhost:3000/health" --health-timeout 5s --health-retries 3 --health-interval 10s --health-start-period 30s ronaldojssilva/simulador-do-caos:v1
+
+
+services:
+  simulador-do-caos:
+    container_name: simulador-do-caos
+    # deixando o parametro da tag como opcional :-latest
+    image: ronaldojssilva/simulador-do-caos:${SIMULADOR_DO_CAOS_TAG:-latest}
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    ports:
+      - 8080:3000
+    restart: always
+
+
+
+
+
+
+
+
+# services:
+  # postgres:
+  #   container_name: postgres_kubenews
+  #   image: postgres:${POSTGRES_TAG}
+  #   ports:
+  #     - 5432:5432
+  #   profiles:
+  #     - dev
+  #     - homolog
+  #   environment:
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_DB: ${POSTGRES_DB}
+  #   volumes:
+  #     - postgres_docker_vol:/var/lib/postgresql/data
+  #   networks:
+  #     - kube_news_net
+
+  # simulador-do-caos:
+  #   container_name: simulador-do-caos
+  #   # deixando o parametro da tag como opcional :-latest
+  #   image: ronaldojssilva/simulador-do-caos:${SIMULADOR_DO_CAOS_TAG:-latest}
+  #   build:
+  #     context: ./src
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 8080:3000
+    # networks:
+    #       - kube_news_net
+    # environment:
+    #   DB_PASSWORD: ${POSTGRES_PASSWORD}
+    #   DB_USERNAME: ${POSTGRES_USER}
+    #   DB_DATABASE:  ${POSTGRES_DB}
+    #   DB_HOST: postgres
+    # depends_on:
+    #   - postgres
+
+# volumes:
+#   postgres_docker_vol:
+#     name: postgres_kubenews_vol
+
+# networks:
+#   kube_news_net:
+#     name: knews_net
+#     driver: bridge
