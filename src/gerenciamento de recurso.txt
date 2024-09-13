@@ -4,3 +4,8 @@ docker container run -d -p 8080:3000 --cpu-period=100000 --cpu-quota=50000 ronal
 
 cpuset-cpus = define qual cpu usar
 docker container run -d -p 8080:3000 --cpu-period=100000 --cpu-quota=50000 --cpuset-cpus=0 ronaldojssilva/simulador-do-caos:v1
+
+
+--cpus = define quantas cpus utilizar
+docker container run -d -p 8080:3000 --cpus=1.5 --cpuset-cpus=0-1 ronaldojssilva/simulador-do-caos:v1
+docker container run -d -p 8080:3000 --cpus=2 --cpuset-cpus=0-1 ronaldojssilva/simulador-do-caos:v1
